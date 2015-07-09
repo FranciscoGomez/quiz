@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var partials = require('express-partials');
 // Importa paquetes con middlewares
 //Middleware: Función JavaScript que se ejecuta al llegar una transacción HTTP.
 
@@ -18,6 +19,7 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.use(partials());
 //Instalar generador de vistas EJS
 
 // uncomment after placing your favicon in /public
