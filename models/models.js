@@ -50,3 +50,7 @@ sequelize.sync().then(function(){
 	};
       });
     }); 
+//La tabla quiz tiene los siguientes campos:
+//	id
+//	pregunta
+//	respuesta

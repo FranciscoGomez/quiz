@@ -1,13 +1,16 @@
+//Archivo: router/index.ejs
+
 var express = require('express');
 var router = express.Router();
 
 var quizController = require ('../controllers/quiz_controller.js');
 
 /* GET home page. */
+//Esta función le pasa la variable title a ../views/index.ejs
 router.get('/', function(req, res) {
   res.render('../views/index.ejs', { title: 'Quiz' });
 
-//res.render('index', { title: 'Quiz' });
+//res.render('index', { title: 'Quiz' }); // es lo mismo que la de arriba.
 });
 
 //router.get('/quizes/question', quizController.question);
@@ -18,9 +21,17 @@ router.param('quizId', quizController.load); // autoload : quizId
 
 //Definición de rutas de /quizes
 router.get('/quizes/',					quizController.index);
+//llama al archivo: /views/quizes/index.ejs
+
 router.get('/quizes/:quizId(\\d+)',			quizController.show);
+//llama al archivo: /views/quizes/show.ejs
+
 router.get('/quizes/:quizId(\\d+)/answer',		quizController.answer);
+//llama al archivo: /views/quizes/answer.ejs
+
 router.get('/quizes/author', 				quizController.author);
+//llama al archivo: /vies/quizes/author.ejs
+
 
 //author se toca en los siguientes archivos:
 // /routes/index.js

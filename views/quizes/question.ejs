@@ -1,4 +1,10 @@
-	<form method="get" action="/quizes/answer">
-		Pregunta: <%= pregunta %> <p>
-		<input type="text" name="respuesta" value= "Responda aquí"/>
-		<input type="submit"  value= "Enviar"/>
+<!--Archivo: /views/quizes/question.ejs -->
+<!-- Está vinculado al archivo: controllers/quiz_controller.js	-->
+<!-- Atención aunque no se utiliza en esta práctica 7 -->
+<!-- Como no se utiliza NO está vinculado al archivo: routers/index.js -->
+
+<form method="get" action="/quizes/answer">
+	Pregunta: <%= pregunta %> <p>
+	<input type="text" name="respuesta" value= "Responda aquí"/>
+	<input type="submit"  value= "Enviar"/>
+</form>

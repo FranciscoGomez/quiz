@@ -1,4 +1,11 @@
+<!-- /controller/quiz_controller.js 		-->
+
 var models = require('../models/models.js');
+
+//campos de la tabla quiz:
+//id
+//pregunta
+//respuesta
 
 //Autoload - factoriza el codigo si ruta incluye :quizId
 exports.load = function(req, res, next, quizId) {
@@ -24,6 +31,8 @@ exports.load = function(req, res, next, quizId) {
 
 //Con búsqueda.
 //GET /quizes
+//Realiza la consulta de preguntas y responde llamando al archivo: '/views/quizes/index.ejs con la variables: quizes
+//que es una tabla donde se cumple los criterios de búsquedas.
 exports.index = function(req, res) {
 	console.log(req.query.search);
 	
@@ -41,12 +50,20 @@ exports.index = function(req, res) {
 	).catch(function(error){next(error);})	
 };
 
+
 //GET /quizes/:id
+//Muestra todas las preguntas.
+//Lo que hace es llamar al archivo: show.ejs, y le pasa como argumento req.quiz, es decir, la tabla de preguntas.
+
 exports.show = function(req, res) {
 	  res.render ('quizes/show.ejs', { quiz: req.quiz});
 };
 
 //GET /quizes/:id/answer
+//Si lo que introduces desde teclado es lo mismo que lo que hay en la tabla de preguntas, Entonces llama al archivo: quizes/answer
+// con las siguientes variables:
+// Tabla de preguntas: req.quiz
+// Variable: respuesta: 'Correcto' o 'Incorrecto'
 exports.answer = function(req, res) {
 	  if (req.query.respuesta.toUpperCase() === req.quiz.respuesta.toUpperCase()) {
 		res.render('quizes/answer',
@@ -57,13 +74,17 @@ exports.answer = function(req, res) {
 	}
 };
 
+
 //GET /quizes/authors
+//llama al archivo quizes/author.ejs con la variable: autor: 'Francisco ...'
 exports.author = function(req, res) {
 	res.render ('quizes/author.ejs', { autor: 'Francisco Javier Gomez Alba'});
 };
 
 
 //GET /quizes/question
+//Para la práctica 7 no se utiliza esta función.
+//Atención: no se utiliza el archivo: /views/quizes/question.ejs
 exports.question = function (req, res) {
 	models.Quiz.findAll().then(function(quiz) {
 	res.render('quizes/question',{pregunta: quiz[0].pregunta});
