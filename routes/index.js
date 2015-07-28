@@ -32,6 +32,8 @@ router.get('/quizes/:quizId(\\d+)/answer',		quizController.answer);
 router.get('/quizes/author', 				quizController.author);
 //llama al archivo: /vies/quizes/author.ejs
 
+router.get('/quizes/new',				quizController.new);
+router.post('/quizes/create',				quizController.create);
 
 //author se toca en los siguientes archivos:
 // /routes/index.js
