@@ -37,6 +37,8 @@ router.post('/quizes/create',				quizController.create);
 
 router.get('/quizes/:quizId(\\d+)/edit',		quizController.edit);
 router.put('/quizes/:quizId(\\d+)',			quizController.update);
+router.delete('/quizes/:quizId(\\d+)', 			quizController.destroy);
+
 
 //author se toca en los siguientes archivos:
 // /routes/index.js
