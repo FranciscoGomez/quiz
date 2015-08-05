@@ -8,7 +8,7 @@ var quizController = require ('../controllers/quiz_controller.js');
 /* GET home page. */
 //Esta función le pasa la variable title a ../views/index.ejs
 router.get('/', function(req, res) {
-  res.render('../views/index.ejs', { title: 'Quiz' });
+  res.render('../views/index.ejs', { title: 'Quiz', errors: []});
 
 //res.render('index', { title: 'Quiz' }); // es lo mismo que la de arriba.
 });
@@ -34,6 +34,9 @@ router.get('/quizes/author', 				quizController.author);
 
 router.get('/quizes/new',				quizController.new);
 router.post('/quizes/create',				quizController.create);
+
+router.get('/quizes/:quizId(\\d+)/edit',		quizController.edit);
+router.put('/quizes/:quizId(\\d+)',			quizController.update);
 
 //author se toca en los siguientes archivos:
 // /routes/index.js
