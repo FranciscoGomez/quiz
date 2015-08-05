@@ -69,9 +69,7 @@ exports.answer = function(req, res) {
 	if (req.query.respuesta === req.quiz.respuesta) {
 	resultado = 'Correcto';
 	}
-	res.render(
-		'quizes/answer',
-		{ quiz: req.quiz, respuesta: resultado, errors: []});
+	res.render('quizes/answer', { quiz: req.quiz, respuesta: resultado, errors: []});
 	};
 
 //GET /quizes/authors
@@ -82,7 +80,7 @@ exports.author = function(req, res) {
 
 //GET /quizes/new
 exports.new = function(req, res) {
-	var quiz = models. Quiz.build( //crea objeto quiz
+	var quiz = models.Quiz.build( //crea objeto quiz
 		{pregunta: "Pregunta", respuesta:"Respuesta"}
 	);
 	res.render('quizes/new', {quiz: quiz, errors: []});
@@ -93,19 +91,16 @@ exports.new = function(req, res) {
 exports.create = function(req, res) {
 	var quiz = models.Quiz.build( req.body.quiz );
 
-quiz
-.validate()
-.then(
-	function(err) {
-	if (err) {
-		res.render('quizes/new', {quiz: quiz, errors: err.errors});
-	} else {
-	quiz //save: guarda en BD campos pregunta y respuesta de quiz
-	.save({fields: ["pregunta", "respuesta"]})
-	.then( function(){ res.redirectt('quizes')})
-	} //res.redirect: Redirección HTTP a lista de preguntas
-	}
-	);
+	quiz.validate().then(
+		function(err) {
+			if (err) {
+				res.render('quizes/new', {quiz: quiz, errors: err.errors});
+			} else {
+				//Guarda en BBDD los campos preguntas y respuesta de quiz
+				quiz.save({fields: ["pregunta", "respuesta"]}).then( function(){ res.redirect('/quizes')})
+				} //res.redirect: Redirección HTTP a lista de preguntas
+			      }
+			    );
 };
 
 //Guarda en BD los campos preguntas y respuesta de quiz. Práctica 8.1.
@@ -125,20 +120,17 @@ exports.update = function (req, res) {
 	req.quiz.pregunta = req.body.quiz.pregunta;
 	req.quiz.respuesta = req.body.quiz.respuesta;
 
-	req.quiz
-	.validate()
-	.then(
-	function(err){
-	if (err) {
-		res.render('quizes/edit', {quiz: req.quiz, errors: err.errors});
-	} else {
-	  req.quiz		//save: Guarda campos pregunta y respuesta en BD
-	  .save( {fields: ["pregunta", "respuesta"]})
-	  .then( function() { res.redirect('/quizes');});
-	} 	//redirección HTTP a lista de preguntas (URL relativo)
-	}
-	);
-	};
+	req.quiz.validate().then(
+		function(err){
+			if (err) {
+				res.render('quizes/edit', {quiz: req.quiz, errors: err.errors});
+			} else {
+				//Guardamos en BBDD los campos preguntas y respuesta de quiz.
+				  req.quiz.save( {fields: ["pregunta", "respuesta"]}).then( function() { res.redirect('/quizes');});
+				} 	//redirección HTTP a lista de preguntas (URL relativo)
+			     }
+			);
+};
 
 // DELETE /quizes/:id
 exports.destroy = function(req, res) {

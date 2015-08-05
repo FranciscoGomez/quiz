@@ -20,7 +20,7 @@ router.param('quizId', quizController.load); // autoload : quizId
 
 
 //Definición de rutas de /quizes
-router.get('/quizes/',					quizController.index);
+router.get('/quizes',					quizController.index);
 //llama al archivo: /views/quizes/index.ejs
 
 router.get('/quizes/:quizId(\\d+)',			quizController.show);
