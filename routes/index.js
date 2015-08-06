@@ -16,7 +16,7 @@ router.get('/', function(req, res) {
 //router.get('/quizes/question', quizController.question);
 //router.get('/quizes/answer', quizController.answer);
 
-router.param('quizId', quizController.load); // autoload : quizId
+router.param('quizId', 					quizController.load); // autoload : quizId
 
 
 //Definición de rutas de /quizes

@@ -1,6 +1,31 @@
-<label for="preg" class="rem"> Pregunta: </label>
-<input type="text" id="preg" name="quiz[pregunta]" value="<%= quiz.pregunta %>"/> <p>
-<label for="resp" class="rem"> Respuesta:</label>
-<input type="text" id="resp" name="quiz[respuesta]" value="<%= quiz.respuesta %>"/> <p>
+<label for="preg" class="rem">Pregunta</label>
+<input type="text" id="preg" name="quiz[pregunta]" value="<%=quiz.pregunta%>"/><p>
+<label for="resp" class="rem">Respuesta</label>
+<input type="text" id="resp" name="quiz[respuesta]" value="<%=quiz.respuesta%>"/><p>
+<label for="tema" class="rem">Tematica</label>
+
+<select name="quiz[tema]" id="tema" onchange="seleccionarValor(this.value)">
+  <option value="otro">Otro</option>
+  <option value="humanidades">Humanidades</option>
+  <option value="ocio">Ocio</option>
+  <option value="ciencia">Ciencia</option>
+  <option value="tecnologia">Tecnología</option>
+</select><p>
 <a href="/quizes"><button type="button">Cancelar</button></a>
 <input type="submit" value="Salvar">
+<script>
+function seleccionarValor(valorSeleccionado){
+	var opcionSeleccionada = document.getElementById('tema');
+	if (!valorSeleccionado) {
+		var valorSeleccionado = "<%=quiz.tema%>";	
+	} 
+	for (var i = 0; i < opcionSeleccionada.length; i++) {
+		if (opcionSeleccionada[i].value == valorSeleccionado) 
+			opcionSeleccionada[i].selected = true;
+		else
+			opcionSeleccionada[i].selected = false;
+	}
+	
+}
+seleccionarValor();
+</script

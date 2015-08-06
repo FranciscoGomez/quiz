@@ -1,11 +1,11 @@
-<!-- Archivo: /views/quizes/index.ejs -->
+<! --Archivo: /views/quizes/index.ejs -->
 <!-- Pequeña explicación: -->
 <!-- La primera vez muestra la base de datos completa, y te permite que introduzca un valor de búsqueda-->
 <!-- Se realiza la búsqueda y muestra el resultado -->
 <!-- Está vinculada al archivo: controllers/quiz_controller.js y  función: "exports.index..." -->
 <!-- Está vinculada al archivo: routers/index.js -->
 
-<table id="TableCenter">
+    <table id="TableCenter">
 	<form method="get" action="/quizes">	
 	<tr>
 		<td><input type="text" name="search" value="Busque una Pregunta"></td>
