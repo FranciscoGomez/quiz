@@ -33,6 +33,7 @@
 		</td>		
 	</tr>
 <!-- 	<div id="preguntas"> -->
+	<% if (quizes.length === 0 ) { %> <h1>No hay preguntas que cumpla ese criterio</h1> <% } %>
 	<% var i; for (i=0;i< quizes.length;i++) {%>
 
 		<tr name="<%=quizes[i].tema%>" >
