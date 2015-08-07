@@ -1,3 +1,4 @@
+<br>
 <!-- Archivo: /views/quizes/index.ejs -->
 <!-- Pequeña explicación: -->
 <!-- La primera vez muestra la base de datos completa, y te permite que introduzca un valor de búsqueda-->
@@ -5,14 +6,21 @@
 <!-- Está vinculada al archivo: controllers/quiz_controller.js y  función: "exports.index..." -->
 <!-- Está vinculada al archivo: routers/index.js -->
 
+
 <table id="TableCenter">
-	<form method="get" action="/quizes">	
+	
 	<tr>
-		<td><input type="text" name="search" value="Busque una Pregunta"></td>
-		<td><input type="submit" value="Buscar"></td>
+		<td></td>
+		<td>
+	     <form method="get" action="/quizes?search="> 
+		<input type="text" name="search" value="Busque una Pregunta">
+		<input type="submit" value="Buscar"> 
+	     </form> 
+		</td>
 	</tr>
-	</form>
+
 	<tr>
+		<td>Seleccione un Tema</td>		
 		<td>
 			<select id="nombreTema" onchange="seleccionarTema(this.value)">
 			  <option value="todos">Todos</option>
@@ -22,12 +30,11 @@
 			  <option value="ciencia">Ciencia</option>
 			  <option value="tecnologia">Tecnología</option>
 			</select>
-		</td>
-		<td>Seleccione un Tema</td>		
+		</td>		
 	</tr>
-	<div id="preguntas">
+<!-- 	<div id="preguntas"> -->
 	<% var i; for (i=0;i< quizes.length;i++) {%>
-		<!--<div id="quizes[i].tema">-->
+
 		<tr name="<%=quizes[i].tema%>" >
 			<td><a href="quizes/<%=quizes[i].id%>"><%=quizes[i].pregunta%></a></td>
 			<td><a href="quizes/<%=quizes[i].id%>/edit"><button>Editar</button></a></td>
@@ -41,7 +48,7 @@
 		</tr>		
 	<% } %>
 	<tr  id='listaVacia' style='display:none'><td colspan='3'><span id='ErrorMsgs'>No hay preguntas para el tema seleccionado</span><td></tr>
-	</div>
+<!--	</div> -->
 	</table><p>
 	<a href="/quizes/new"><button type="button">Crear Pregunta</button></a>
 	<script>

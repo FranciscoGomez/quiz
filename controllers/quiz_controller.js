@@ -96,7 +96,7 @@ exports.create = function(req, res) {
 				res.render('quizes/new', {quiz: quiz, errors: err.errors});
 			} else {
 				//Guarda en BBDD los campos preguntas y respuesta de quiz
-				quiz.save({fields: ["pregunta", "respuesta", "tema"]}).then( function(){ res.redirect('/quizes')})
+				quiz.save({fields: ["pregunta", "respuesta", "tema"]}).then( function(){ res.redirect('/quizes?search=')})
 				} //res.redirect: Redirección HTTP a lista de preguntas
 			      }
 			    );
@@ -126,7 +126,7 @@ exports.update = function (req, res) {
 				res.render('quizes/edit', {quiz: req.quiz, errors: err.errors});
 			} else {
 				//Guardamos en BBDD los campos preguntas y respuesta de quiz.
-				  req.quiz.save( {fields: ["pregunta", "respuesta", "tema"]}).then( function() { res.redirect('/quizes');});
+				  req.quiz.save( {fields: ["pregunta", "respuesta", "tema"]}).then( function() { res.redirect('/quizes?search=');});
 				} 	//redirección HTTP a lista de preguntas (URL relativo)
 			     }
 			);
@@ -135,7 +135,7 @@ exports.update = function (req, res) {
 // DELETE /quizes/:id
 exports.destroy = function(req, res) {
 	req.quiz.destroy().then(function() {
-		res.redirect('/quizes');
+		res.redirect('/quizes?search=');
 	}).catch(function(error){next(error)});
 
 };
