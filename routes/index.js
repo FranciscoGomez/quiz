@@ -5,6 +5,7 @@ var router = express.Router();
 
 var quizController = require('../controllers/quiz_controller.js');
 var commentController = require('../controllers/comment_controller.js');
+var sessionController = require('../controllers/session_controller.js');
 
 /* GET home page. */
 //Esta función le pasa la variable title a ../views/index.ejs
@@ -19,6 +20,10 @@ router.get('/', function(req, res) {
 
 router.param('quizId', 					quizController.load); // autoload : quizId
 
+//Definición de rutas de sesión
+router.get('/login', 					sessionController.new); 	//formulario login
+router.post('/login',					sessionController.create);	//crear sesión
+router.get('/logout',					sessionController.destroy),	//destruir sesión
 
 //Definición de rutas de /quizes
 router.get('/quizes',					quizController.index);
