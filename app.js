@@ -56,7 +56,7 @@ app.use(function(req, res, next) {
 
     if(req.session.user){ //si hay sesión
         var actual = new Date().getTime();//marca temporal actual en milisegundos
-        var pasado_dos_minutos = 12000;//2*60*1000 dos minutos en milisegundos
+        var pasado_dos_minutos = 6000;//2*60*1000 dos minutos en milisegundos
 
         if(req.session.user.tiempo){ // si está establecida la marca temporal «tiempo»     
             //si han pasado más de 120 segundos redireccionamos para destruir la sesión
@@ -65,7 +65,7 @@ app.use(function(req, res, next) {
                 //en lugar de esto, se podría haber borrado 
                 //la sesión directamente y redireccionado a login
                 delete req.session.user;
-                res.redirect('/login');
+		//res.redirect('/logout');
             }
 
         }else{            
