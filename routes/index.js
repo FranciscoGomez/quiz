@@ -3,7 +3,7 @@
 var express = require('express');
 var router = express.Router();
 
-var quizController = require('../controllers/quiz_controller.js');
+var quizController =    require('../controllers/quiz_controller.js');
 var commentController = require('../controllers/comment_controller.js');
 var sessionController = require('../controllers/session_controller.js');
 
@@ -27,6 +27,7 @@ router.post('/login',					sessionController.create);	//crear sesión
 router.get('/logout',					sessionController.destroy),	//destruir sesión
 
 //Definición de rutas de /quizes
+//Preguntas
 router.get('/quizes',					quizController.index);
 //llama al archivo: /views/quizes/index.ejs
 
@@ -49,7 +50,7 @@ router.delete('/quizes/:quizId(\\d+)', 			sessionController.loginRequired, quizC
 //Definición de rutas de comentarios
 router.get('/quizes/:quizId(\\d+)/comments/new', 	commentController.new);
 router.post('/quizes/:quizId(\\d+)/comments',		commentController.create);
-router.get('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish', sessionController.loginRequired, commentController.publish);
+router.put('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish', sessionController.loginRequired, commentController.publish);
 
 //author se toca en los siguientes archivos:
 // /routes/index.js
