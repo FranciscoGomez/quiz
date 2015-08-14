@@ -67,7 +67,7 @@ exports.show = function(req, res) {
 // Variable: respuesta: 'Correcto' o 'Incorrecto'
 exports.answer = function(req, res) {
 	var resultado = 'Incorrecto';
-	if (req.query.respuesta === req.quiz.respuesta) {
+	if (req.query.respuesta.toUpperCase() === req.quiz.respuesta.toUpperCase()) {
 	resultado = 'Correcto';
 	}
 	res.render('quizes/answer', { quiz: req.quiz, respuesta: resultado, errors: []});

@@ -1,6 +1,12 @@
-<!-- Archivo: /views/quizes/author.ejs -->
-<!-- Está vinculado al archivo: controllers/quiz_controller.js, y función: "exports.author..." -->
-<!-- Está vinculado al archivo: routers/index.js -->
+<!-- Archivo: /views/quizes/author.ejs 											-->
+
+<!-- En el archivo: routes/index.js tiene la siguiente línea: router.get('/quizes/author', quizController.author);	-->
+
+<!-- En el archivo: controllers/quiz_controller.js, tiene las siguientes líneas: 					-->
+<!-- exports.author = function(req, res) { 										-->
+<!--	res.render ('quizes/author.ejs', { autor: 'Francisco Javier Gomez Alba', errors: []});				-->
+<!-- };															-->
+<!-- Está vinculado al archivo: routers/index.js 									-->
 
 <h2><%=autor%> </h2>
  <br>
