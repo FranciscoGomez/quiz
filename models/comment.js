@@ -1,3 +1,5 @@
+//Archivo: models/comment.js
+
 // Definición del modelo de Comment con validación
 
 module.exports = function(sequelize, DataTypes) {

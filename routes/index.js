@@ -1,4 +1,4 @@
-//Archivo: router/index.ejs
+//Archivo: routes/index.ejs
 
 var express = require('express');
 var router = express.Router();

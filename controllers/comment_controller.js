@@ -1,3 +1,5 @@
+// Archivo: controllers/comment_controller.js
+
 var models = require('../models/models.js');
 
 //Autoload :id de comentarios

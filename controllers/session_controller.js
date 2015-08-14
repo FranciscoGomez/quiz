@@ -1,3 +1,5 @@
+//Archivo: controllers/session_controller.js
+
 //MW deautorización de accesos HTTP restringidos
 exports.loginRequired = function(req, res, next) {
 	if (req.session.user) {

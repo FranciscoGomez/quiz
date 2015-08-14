@@ -1,4 +1,4 @@
-<!-- /controller/quiz_controller.js 		-->
+// Archivo: controller/quiz_controller.js 		-->
 
 var models = require('../models/models.js');
 
