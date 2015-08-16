@@ -1,4 +1,3 @@
-// Archivo: app.js
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -30,12 +29,32 @@ app.use(partials());
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(bodyParser.urlencoded());
 app.use(cookieParser('Quiz 2015'));
-app.use(session());
+//app.use(session());
+app.use(session({
+	secret: 'semilla',
+	resave: false,
+	saveUninitialized: true
+	}));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 //Instalar los middlewares importados.
+
+app.use(function(req, res, next){
+    var expire = 60*1000*2;
+    var now = new Date().getTime();
+
+    if(req.session && req.session.lastAccess) {
+    var lifetime = now - req.session.lastAccess;
+        if (expire <= lifetime){
+            delete req.session.user;
+        }
+    }
+    req.session.lastAccess = now;
+    next();
+});
 
 
 //Helpers dinámicos
@@ -53,28 +72,28 @@ next();
 
 
 //MW Se comprueba la sesión a fin de desconectar si han transcurrido más de dos min
-app.use(function(req, res, next) {
+//app.use(function(req, res, next) {
 
-    if(req.session.user){ //si hay sesión
-        var actual = new Date().getTime();//marca temporal actual en milisegundos
-        var pasado_dos_minutos = 12000;//2*60*1000 dos minutos en milisegundos
+//    if(req.session.user){ //si hay sesión
+//        var actual = new Date().getTime();//marca temporal actual en milisegundos
+//        var pasado_dos_minutos = 12000;//2*60*1000 dos minutos en milisegundos
 
-        if(req.session.user.tiempo){ // si está establecida la marca temporal «tiempo»     
+//        if(req.session.user.tiempo){ // si está establecida la marca temporal «tiempo»     
             //si han pasado más de 120 segundos redireccionamos para destruir la sesión
-            if(actual - res.locals.session.user.tiempo  > pasado_dos_minutos){                
+//            if(actual - res.locals.session.user.tiempo  > pasado_dos_minutos){                
 		//res.redirect('/logout');
                 //en lugar de esto, se podría haber borrado 
                 //la sesión directamente y redireccionado a login
-                delete req.session.user;
+//                delete req.session.user;
 		//res.redirect('/logout');
-            }
+//            }
 
-        }else{            
-            req.session.user.tiempo = actual; //se asigna la marca temporal «tiempo»
-        }     
-    } 
-    next();
-});
+//        }else{            
+//            req.session.user.tiempo = actual; //se asigna la marca temporal «tiempo»
+//        }     
+//    } 
+//    next();
+//});
 
 app.use('/', routes);
 //app.use('/users', users);

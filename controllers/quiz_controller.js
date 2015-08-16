@@ -1,5 +1,3 @@
-// Archivo: controller/quiz_controller.js 		-->
-
 var models = require('../models/models.js');
 
 //campos de la tabla quiz:
@@ -95,10 +93,12 @@ exports.create = function(req, res) {
 	quiz.validate().then(
 		function(err) {
 			if (err) {
-				res.render('quizes/new', {quiz: quiz, errors: err.errors});
+			res.render('quizes/new', {quiz: quiz, errors: err.errors});
+			console.log("quiz/new");
 			} else {
 				//Guarda en BBDD los campos preguntas y respuesta de quiz
-				quiz.save({fields: ["pregunta", "respuesta", "tema"]}).then( function(){ res.redirect('/quizes?search=')})
+			quiz.save({fields: ["pregunta", "respuesta", "tema"]}).then( function(){ res.redirect('/quizes?search=');});
+			console.log("exports create quiz.save");
 				} //res.redirect: Redirección HTTP a lista de preguntas
 			      }
 			    );
@@ -128,7 +128,8 @@ exports.update = function (req, res) {
 				res.render('quizes/edit', {quiz: req.quiz, errors: err.errors});
 			} else {
 				//Guardamos en BBDD los campos preguntas y respuesta de quiz.
-				  req.quiz.save( {fields: ["pregunta", "respuesta", "tema"]}).then( function() { res.redirect('/quizes?search=');});
+		  req.quiz.save( {fields: ["pregunta", "respuesta", "tema"]}).then( function() { res.redirect('/quizes?search=');});
+		  console.log("exports.update  quiz.save");
 				} 	//redirección HTTP a lista de preguntas (URL relativo)
 			     }
 			);
